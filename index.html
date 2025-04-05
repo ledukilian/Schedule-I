@@ -3,858 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule-I : Guide du cuisinier</title>
+    <title>Guide du recettes</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="src/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!---->
+    <meta property="og:title" content="Schedule-I : Guide de recettes" />
+    <meta property="og:description" content="Il est temps de cuisiner." />
+    <meta property="og:image" content="src/logo.png" />
+    <meta property="og:url" content="https://ledukilian.github.io/Schedule-I/" />
+    <meta property="og:type" content="website" />
+    <!---->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Schedule-I : Guide de recettes" />
+    <meta name="twitter:description" content="Il est temps de cuisiner." />
+    <meta name="twitter:image" content="src/logo.png" />
+
+
 </head>
 <body>
 <div class="container">
     <div class="logo-container">
         <img src="src/logo.png" alt="Logo Schedule-I" class="logo">
     </div>
-    <h1><span class="color-green">Schedule-I :</span> Guide du cuisinier</h1>
-
-    <div class="tree-view" id="main-tree">
+    <h1>
+        <span class="color-green">Schedule-I :</span> Guide du cuisinier
+    </h1>
+    <section class="tree-view" id="main-tree">
         <!-- La structure sera générée par JavaScript -->
+    </section>
+    <div class="footer">
+        <p class="version"> Version 0.1.0</p>
+        <a href="https://github.com/ledukilian/Schedule-I" target="_blank" class="text-blue-900 hover:text-blue-700">GitHub</a>
+        <p style="margin-top:5px">Fait avec ❤️ par <a href="https://github.com/ledukilian" target="_blank" class="text-blue-900 hover:text-blue-700">Kilian LE DU</a></p>
     </div>
 </div>
-
 <script>
-    // Structure des données initiales
-    const data = [
-        {
-            name: "🌿 OG Kush",
-            family: "WEED",
-            color: "green",
-            price: "10,00 €",
-            children: [
-                {
-                    "additif": "🧴 Addy",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Dark Punch",
-                    "vente": "60 €",
-                    "coutProd": "12,75 €",
-                    "marge": "47 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥛 Horse Semen",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Pink Stink",
-                    "vente": "57 €",
-                    "coutProd": "12,75 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🔋 Battery",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Big Stink",
-                    "vente": "52 €",
-                    "coutProd": "11,75 €",
-                    "marge": "40 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍶 Iodine",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Dark Punch",
-                    "vente": "60 €",
-                    "coutProd": "11,75 €",
-                    "marge": "48 €",
-                    "children": []
-                },
-                {
-                    "additif": "🌶️ Chili",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Aspen Slime",
-                    "vente": "52 €",
-                    "coutProd": "10,75 €",
-                    "marge": "41 €",
-                    "children": []
-                },
-                {
-                    "additif": "🫛 Mega bean",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Gorilla Splooge",
-                    "vente": "64 €",
-                    "coutProd": "10,75 €",
-                    "marge": "53 €",
-                    "children": []
-                },
-                {
-                    "additif": "⚡ Energy Drink",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Purple Assblaster",
-                    "vente": "50 €",
-                    "coutProd": "9,75 €",
-                    "marge": "40 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Motor oil",
-                    "prixAdditif": "6 €",
-                    "obtenu": "OG Fuel",
-                    "vente": "50 €",
-                    "coutProd": "9,75 €",
-                    "marge": "40 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧴 Flu Medecine",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Super Smegma",
-                    "vente": "58 €",
-                    "coutProd": "8,75 €",
-                    "marge": "49 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Gasoline",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Miracle Crack",
-                    "vente": "38 €",
-                    "coutProd": "8,75 €",
-                    "marge": "29 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧼 Mouth wash",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Purple Cheese",
-                    "vente": "64 €",
-                    "coutProd": "7,75 €",
-                    "marge": "56 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Viagra",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Grandaddy Urkle",
-                    "vente": "55 €",
-                    "coutProd": "7,75 €",
-                    "marge": "47 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥧 Donuts",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Dark Fruit",
-                    "vente": "48 €",
-                    "coutProd": "6,75 €",
-                    "marge": "41 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Paracetamol",
-                    "prixAdditif": "3 €",
-                    "obtenu": "LA Durkle",
-                    "vente": "55 €",
-                    "coutProd": "6,75 €",
-                    "marge": "48 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍌 Banana",
-                    "prixAdditif": "2 €",
-                    "obtenu": "White Puke",
-                    "vente": "50 €",
-                    "coutProd": "5,75 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥤 Cuke",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Thick Monkey",
-                    "vente": "46 €",
-                    "coutProd": "5,75 €",
-                    "marge": "40 €",
-                    "children": []
-                }
-            ]
-        },
-        {
-            name: "🌿 Sour Diesel",
-            family: "WEED",
-            color: "#c5d678",
-            price: "10,00 €",
-            children: [
-                {
-                    "additif": "🧴 Addy",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Dream Ass",
-                    "vente": "65 €",
-                    "coutProd": "13,38 €",
-                    "marge": "52 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥛 Horse Semen",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Girl Scout Bud",
-                    "vente": "58 €",
-                    "coutProd": "13,38 €",
-                    "marge": "45 €",
-                    "children": []
-                },
-                {
-                    "additif": "🔋 Battery",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Aspen Mint",
-                    "vente": "54 €",
-                    "coutProd": "12,38 €",
-                    "marge": "42 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍶 Iodine",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Dream Ass",
-                    "vente": "65 €",
-                    "coutProd": "12,38 €",
-                    "marge": "53 €",
-                    "children": []
-                },
-                {
-                    "additif": "🌶️ Chili",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Grandaddy Fuel",
-                    "vente": "53 €",
-                    "coutProd": "11,38 €",
-                    "marge": "42 €",
-                    "children": []
-                },
-                {
-                    "additif": "🫛 Mega bean",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Hary Smegma",
-                    "vente": "52 €",
-                    "coutProd": "11,38 €",
-                    "marge": "41 €",
-                    "children": []
-                },
-                {
-                    "additif": "⚡ Energy Drink",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Hairy Cheese",
-                    "vente": "51 €",
-                    "coutProd": "10,38 €",
-                    "marge": "41 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Motor oil",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Afghan Crystal",
-                    "vente": "52 €",
-                    "coutProd": "10,38 €",
-                    "marge": "42 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧴 Flu Medecine",
-                    "prixAdditif": "5 €",
-                    "obtenu": "California Cookies",
-                    "vente": "49 €",
-                    "coutProd": "9,38 €",
-                    "marge": "40 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Gasoline",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Fruity Ghost",
-                    "vente": "40 €",
-                    "coutProd": "9,38 €",
-                    "marge": "31 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧼 Mouth wash",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Extreme Punch",
-                    "vente": "50 €",
-                    "coutProd": "8,38 €",
-                    "marge": "42 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Viagra",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Wedding Ass",
-                    "vente": "56 €",
-                    "coutProd": "8,38 €",
-                    "marge": "48 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥧 Donuts",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Thick Crack",
-                    "vente": "50 €",
-                    "coutProd": "7,38 €",
-                    "marge": "43 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Paracetamol",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Ultra Slime",
-                    "vente": "48 €",
-                    "coutProd": "7,38 €",
-                    "marge": "41 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍌 Banana",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Fruity Puke",
-                    "vente": "47 €",
-                    "coutProd": "6,38 €",
-                    "marge": "41 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥤 Cuke",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Thick Splooge",
-                    "vente": "48 €",
-                    "coutProd": "6,38 €",
-                    "marge": "42 €",
-                    "children": []
-                }
-            ]
-        },
-        {
-            name: "🌿 Green Crack",
-            family: "WEED",
-            color: "#36ff6b",
-            price: "10,00 €",
-            children: [
-                {
-                    "additif": "🧴 Addy",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Thick Ghost",
-                    "vente": "57 €",
-                    "coutProd": "14,00 €",
-                    "marge": "43 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥛 Horse Semen",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Purple Cookies",
-                    "vente": "61 €",
-                    "coutProd": "14,00 €",
-                    "marge": "47 €",
-                    "children": []
-                },
-                {
-                    "additif": "🔋 Battery",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Stinky Cake",
-                    "vente": "57 €",
-                    "coutProd": "13,00 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍶 Iodine",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Thick Ghost",
-                    "vente": "57 €",
-                    "coutProd": "13,00 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🌶️ Chili",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Shiny Urkle",
-                    "vente": "56 €",
-                    "coutProd": "12,00 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🫛 Mega bean",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Pink Puke",
-                    "vente": "67 €",
-                    "coutProd": "12,00 €",
-                    "marge": "55 €",
-                    "children": []
-                },
-                {
-                    "additif": "⚡ Energy Drink",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Ultra Grool",
-                    "vente": "54 €",
-                    "coutProd": "11,00 €",
-                    "marge": "43 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Motor oil",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Bio Assblaster",
-                    "vente": "51 €",
-                    "coutProd": "11,00 €",
-                    "marge": "40 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧴 Flu Medecine",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Aspen Smegma",
-                    "vente": "52 €",
-                    "coutProd": "10,00 €",
-                    "marge": "42 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Gasoline",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Sweet Mint",
-                    "vente": "41 €",
-                    "coutProd": "10,00 €",
-                    "marge": "31 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧼 Mouth wash",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Fat Cum",
-                    "vente": "53 €",
-                    "coutProd": "9,00 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Viagra",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Big Rhino",
-                    "vente": "59 €",
-                    "coutProd": "9,00 €",
-                    "marge": "50 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥧 Donuts",
-                    "prixAdditif": "3 €",
-                    "obtenu": "California Shart",
-                    "vente": "52 €",
-                    "coutProd": "8,00 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Paracetamol",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Dark Bud",
-                    "vente": "43 €",
-                    "coutProd": "8,00 €",
-                    "marge": "35 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍌 Banana",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Extreme Slime",
-                    "vente": "57 €",
-                    "coutProd": "7,00 €",
-                    "marge": "50 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥤 Cuke",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Green Crack",
-                    "vente": "43 €",
-                    "coutProd": "7,00 €",
-                    "marge": "36 €",
-                    "children": []
-                }
-            ]
-        },
-        {
-            name: "🌿 Granddady Purple",
-            family: "WEED",
-            color: "purple",
-            price: "10,00 €",
-            children: [
-                {
-                    "additif": "🧴 Addy",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Pink Cookies",
-                    "vente": "59 €",
-                    "coutProd": "14,63 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥛 Horse Semen",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Mega Cookies",
-                    "vente": "62 €",
-                    "coutProd": "14,63 €",
-                    "marge": "47 €",
-                    "children": []
-                },
-                {
-                    "additif": "🔋 Battery",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Super Smegma",
-                    "vente": "58 €",
-                    "coutProd": "13,63 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍶 Iodine",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Pink Cookies",
-                    "vente": "59 €",
-                    "coutProd": "13,63 €",
-                    "marge": "45 €",
-                    "children": []
-                },
-                {
-                    "additif": "🌶️ Chili",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Mega Diesel",
-                    "vente": "57 €",
-                    "coutProd": "12,63 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🫛 Mega bean",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Hairy Gold",
-                    "vente": "57 €",
-                    "coutProd": "12,63 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "⚡ Energy Drink",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Strawberry Shart",
-                    "vente": "50 €",
-                    "coutProd": "11,63 €",
-                    "marge": "38 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Motor oil",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Miracle Haze",
-                    "vente": "56 €",
-                    "coutProd": "11,63 €",
-                    "marge": "44 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧴 Flu Medecine",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Grandaddy Purple",
-                    "vente": "44 €",
-                    "coutProd": "10,63 €",
-                    "marge": "33 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Gasoline",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Sweet Balls",
-                    "vente": "44 €",
-                    "coutProd": "10,63 €",
-                    "marge": "33 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧼 Mouth wash",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Sexy Monkey",
-                    "vente": "55 €",
-                    "coutProd": "9,63 €",
-                    "marge": "45 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Viagra",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Nightmare Sploodge",
-                    "vente": "52 €",
-                    "coutProd": "9,63 €",
-                    "marge": "42 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥧 Donuts",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Slimy Balls",
-                    "vente": "54 €",
-                    "coutProd": "8,63 €",
-                    "marge": "45 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Paracetamol",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Aspen Death",
-                    "vente": "60 €",
-                    "coutProd": "8,63 €",
-                    "marge": "51 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍌 Banana",
-                    "prixAdditif": "2 €",
-                    "obtenu": "LA Thunderfuck",
-                    "vente": "51 €",
-                    "coutProd": "7,63 €",
-                    "marge": "43 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥤 Cuke",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Aspen Smegma",
-                    "vente": "52 €",
-                    "coutProd": "7,63 €",
-                    "marge": "44 €",
-                    "children": []
-                }
-            ]
-        },
-        /*{
-            name: "💎 Méthamphétamine",
-            price: "10,00 €",
-            color: "blue",
-            children: []
-        },*/
-        {
-            name: "❄️ Cocaïne",
-            family: "COCAIN",
-            price: "80,00 €",
-            color: "white",
-            children: [
-                {
-                    "additif": "🥛 Horse Semen",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Fat Urkle",
-                    "vente": "228 €",
-                    "coutProd": "19,00 €",
-                    "marge": "209 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Viagra",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Miracle Fruit",
-                    "vente": "219 €",
-                    "coutProd": "14,00 €",
-                    "marge": "205 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧴 Addy",
-                    "prixAdditif": "9 €",
-                    "obtenu": "Dark Cheese",
-                    "vente": "216 €",
-                    "coutProd": "19,00 €",
-                    "marge": "197 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍶 Iodine",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Stinky Cum",
-                    "vente": "213 €",
-                    "coutProd": "18,00 €",
-                    "marge": "195 €",
-                    "children": []
-                },
-                {
-                    "additif": "🔋 Battery",
-                    "prixAdditif": "8 €",
-                    "obtenu": "Bright-Eyed",
-                    "vente": "210 €",
-                    "coutProd": "18,00 €",
-                    "marge": "192 €",
-                    "children": []
-                },
-                {
-                    "additif": "🌶️ Chili",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Big Bud",
-                    "vente": "207 €",
-                    "coutProd": "17,00 €",
-                    "marge": "190 €",
-                    "children": []
-                },
-                {
-                    "additif": "🫛 Mega bean",
-                    "prixAdditif": "7 €",
-                    "obtenu": "Pink Rhino",
-                    "vente": "204 €",
-                    "coutProd": "17,00 €",
-                    "marge": "187 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Motor oil",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Mega McLovin",
-                    "vente": "201 €",
-                    "coutProd": "16,00 €",
-                    "marge": "185 €",
-                    "children": []
-                },
-                {
-                    "additif": "⚡ Energy Drink",
-                    "prixAdditif": "6 €",
-                    "obtenu": "Ultra Monkey",
-                    "vente": "198 €",
-                    "coutProd": "16,00 €",
-                    "marge": "182 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧼 Mouth wash",
-                    "prixAdditif": "4 €",
-                    "obtenu": "Fat Balls",
-                    "vente": "195 €",
-                    "coutProd": "14,00 €",
-                    "marge": "181 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥧 Donuts",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Fat Puke",
-                    "vente": "192 €",
-                    "coutProd": "13,00 €",
-                    "marge": "179 €",
-                    "children": []
-                },
-                {
-                    "additif": "🧴 Flu Medecine",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Wedding Cheese",
-                    "vente": "189 €",
-                    "coutProd": "15,00 €",
-                    "marge": "174 €",
-                    "children": []
-                },
-                {
-                    "additif": "💊 Paracetamol",
-                    "prixAdditif": "3 €",
-                    "obtenu": "Stinky Queef",
-                    "vente": "186 €",
-                    "coutProd": "13,00 €",
-                    "marge": "173 €",
-                    "children": []
-                },
-                {
-                    "additif": "🥤 Cuke",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Aspen Cake",
-                    "vente": "183 €",
-                    "coutProd": "12,00 €",
-                    "marge": "171 €",
-                    "children": []
-                },
-                {
-                    "additif": "🍌 Banana",
-                    "prixAdditif": "2 €",
-                    "obtenu": "Tokyo Grool",
-                    "vente": "180 €",
-                    "coutProd": "12,00 €",
-                    "marge": "168 €",
-                    "children": []
-                },
-                {
-                    "additif": "⛽ Gasoline",
-                    "prixAdditif": "5 €",
-                    "obtenu": "Pink Piss",
-                    "vente": "150 €",
-                    "coutProd": "15,00 €",
-                    "marge": "135 €",
-                    "children": []
-                }
-            ]
-        }
-    ];
+    // Structure des données
+    const initialData = [];
 
     // Fonction pour créer l'arborescence
     function createTree(data, parentElement, level = 0) {
+        // Sort data by "marge" in descending order
+        data.sort((a, b) => {
+            if (a.marge && b.marge) {
+                return parseFloat(b.marge) - parseFloat(a.marge);
+            }
+            return 0;
+        });
+
+        // count children and add count property to each data
+        data.forEach(item => {
+            if (item.children && item.children.length > 0) {
+                item.count = item.children.length;
+            } else {
+                item.count = 0;
+            }
+        });
+
         data.forEach((item, index) => {
             const treeItem = document.createElement('div');
             treeItem.className = `tree-item level-${level}`;
 
             const treeHeader = document.createElement('div');
             treeHeader.className = 'tree-header';
-            treeHeader.style.borderColor = item.color || 'initial';
+            if (item.color) {
+                treeHeader.style.borderColor = item.color;
+            }
 
             // Si c'est un élément principal (avec name)
             if (item.name) {
                 if (item.price) {
                     treeHeader.innerHTML = `
-                            <span class="tree-toggle">▶</span>
-                            <span class="emoji">${item.name.split(' ')[0]}</span>
-                            <span>${item.name.split(' ').slice(1).join(' ')}</span>
-                        `;
+                        <span class="tree-toggle">▶</span>
+                        <span class="emoji">${item.name.split(' ')[0]}</span>
+                        <span>${item.name.split(' ').slice(1).join(' ')}</span>
+                        <span class="count">${item.count} recettes</span>
+                    `;
                 } else {
                     treeHeader.innerHTML = `
-                            <span class="tree-toggle">▶</span>
-                            <span>${item.name}</span>
-                        `;
+                        <span class="tree-toggle">▶</span>
+                        <span>${item.name}</span>
+                    `;
                 }
             }
-            // Si c'est un élément secondaire (avec additif) - Afficher toutes les infos dans l'en-tête
+            // Si c'est un élément secondaire (avec additif)
             else if (item.additif) {
                 treeHeader.innerHTML = `
-                        <span class="tree-toggle">▶</span>
-                        <span class="emoji">${item.additif.split(' ')[0]}</span>
-                        <span>${item.additif.split(' ').slice(1).join(' ')}</span>
-                        <div class="info-inline">
-                            <span class="info-pill">Produit: <strong>${item.obtenu}</strong></span>
-                            <span class="info-pill">Coût: <strong>${item.coutProd}</strong></span>
-                            <span class="info-pill">Vente: <strong>${item.vente}</strong></span>
-                            <span class="info-pill profit">Marge: <strong>${item.marge}</strong></span>
-                        </div>
-                    `;
+                    <span class="mobile-margin-b-15">${item.obtenu}</span>
+                    <div class="info-inline">
+                        <span class="mobile-margin-y-5 margin info-pill">${item.additif.split(' ')[0]} ${item.additif.split(' ').slice(1).join(' ')}</span>
+                        <span class="mobile-margin-y-5 info-pill profit">Marge: <strong>${item.marge}</strong></span>
+                        <span class="mobile-margin-y-5 info-pill sell">Vente: <strong>${item.vente}</strong></span>
+                        <span class="mobile-margin-y-5 info-pill cost">Coût: <strong>${item.coutProd}</strong></span>
+                    </div>
+                `;
             }
             // Pour les autres niveaux
             else {
                 treeHeader.innerHTML = `
-                        <span class="tree-toggle">▶</span>
-                        <span>${item.name || 'Option'}</span>
-                    `;
+                    <span class="tree-toggle">▶</span>
+                    <span>${item.name || 'Option'}</span>
+                `;
             }
 
             treeItem.appendChild(treeHeader);
 
-            // Si l'élément a des enfants ou des détails supplémentaires
+            // Contenu de l'élément (section pliable)
             const treeContent = document.createElement('div');
             treeContent.className = 'tree-content';
-
-            // Pour les éléments avec additif, pas besoin d'afficher à nouveau les détails
-            // car ils sont déjà dans l'en-tête, mais on peut toujours afficher des détails supplémentaires
 
             // Ajouter le détail si présent
             if (item.detail) {
                 const detailsSection = document.createElement('div');
                 detailsSection.className = 'details-section';
                 detailsSection.innerHTML = `
-                        <div class="details-title">Détails</div>
-                        <div>${item.detail}</div>
-                    `;
+                    <div class="details-title">Détails</div>
+                    <div>${item.detail}</div>
+                `;
                 treeContent.appendChild(detailsSection);
             }
 
@@ -872,32 +138,42 @@
                 treeContent.classList.toggle('active');
                 treeHeader.classList.toggle('active');
                 const toggle = treeHeader.querySelector('.tree-toggle');
-                if (treeContent.classList.contains('active')) {
-                    toggle.textContent = '▼';
-                } else {
-                    toggle.textContent = '▶';
+                if (toggle) {
+                    if (treeContent.classList.contains('active')) {
+                        toggle.textContent = '▼';
+                    } else {
+                        toggle.textContent = '▶';
+                    }
                 }
             });
 
-            // Déplier automatiquement le premier élément et son premier enfant
-            /*if (level === 0 && index === 0) {
-                treeHeader.click(); // Déplier le premier élément principal
-
-                // Déplier le premier enfant après un court délai pour assurer que le DOM est prêt
+            // Déplier automatiquement le premier élément pour la démo
+            if (level === 0 && index === 0) {
                 setTimeout(() => {
-                    const firstChild = treeContent.querySelector('.tree-item');
-                    if (firstChild) {
-                        const firstChildHeader = firstChild.querySelector('.tree-header');
-                        firstChildHeader.click();
-                    }
-                }, 100);
-            }*/
+                    treeHeader.click();
+                }, 500);
+            }
         });
     }
 
-    // Initialiser l'arborescence
-    const mainTree = document.getElementById('main-tree');
-    createTree(data, mainTree);
+    // Fonction pour tenter de charger les données de l'API, sinon utiliser les données initiales
+    function loadData() {
+        fetch('https://ledukilian.github.io/Schedule-I/data.json')
+            .then(response => response.json())
+            .then(data => {
+                const mainTree = document.getElementById('main-tree');
+                mainTree.innerHTML = ''; // Clear any existing content
+                createTree(data, mainTree);
+            })
+            .catch(error => {
+                console.log('Utilisation des données initiales:', error);
+                const mainTree = document.getElementById('main-tree');
+                createTree(initialData, mainTree);
+            });
+    }
+
+    // Charger les données
+    document.addEventListener('DOMContentLoaded', loadData);
 </script>
 </body>
 </html>
