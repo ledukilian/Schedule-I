@@ -2,7 +2,7 @@
   {
     "name": "🌿 OG Kush",
     "family": "WEED",
-    "color": "green",
+    "color": "#88bd7e",
     "price": "10,00 €",
     "children": [
       {
@@ -154,7 +154,7 @@
   {
     "name": "🌿 Sour Diesel",
     "family": "WEED",
-    "color": "#c5d678",
+    "color": "#d5deab",
     "price": "10,00 €",
     "children": [
       {
@@ -306,7 +306,7 @@
   {
     "name": "🌿 Green Crack",
     "family": "WEED",
-    "color": "#36ff6b",
+    "color": "#64e385",
     "price": "10,00 €",
     "children": [
       {
@@ -458,7 +458,7 @@
   {
     "name": "🌿 Granddady Purple",
     "family": "WEED",
-    "color": "purple",
+    "color": "#b493c9",
     "price": "10,00 €",
     "children": [
       {
