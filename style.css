@@ -1,0 +1,169 @@
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: url('src/page_bg_raw.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.color-yellow {
+    color: #FDDC00;
+}
+
+.color-green {
+    color: #97CC72;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(15, 15, 20, 0.85);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Styles pour l'arborescence */
+.tree-view {
+    padding: 10px;
+}
+
+.tree-item {
+    margin-bottom: 4px;
+    border-radius: 8px;
+}
+
+.tree-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #2a2a35;
+    transition: background-color 0.2s ease;
+}
+
+.tree-header:hover {
+    background-color: #3a3a48;
+}
+
+.tree-toggle {
+    margin-right: 10px;
+    color: #5d9cec;
+    width: 20px;
+    text-align: center;
+}
+
+.emoji {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.badge {
+    margin-left: auto;
+    background-color: #5d9cec;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.tree-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding-left: 25px;
+}
+
+.tree-content.active {
+    max-height: 1000px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Styles spécifiques aux niveaux */
+.level-0 > .tree-header {
+    background-color: #1c1c24;
+    border-left: 8px solid #FFFFFF;
+}
+
+.level-1 > .tree-header {
+    background-color: #2d2d3a;
+    border-left: 4px solid #ff4757;
+}
+
+.level-2 > .tree-header {
+    background-color: #383847;
+    border-left: 4px solid #ffa502;
+}
+
+.info-inline {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 15px;
+    gap: 8px;
+}
+
+.info-pill {
+    background: #383850;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.85em;
+}
+
+.info-pill.profit {
+    background: #2ed573;
+    color: #1c1c24;
+}
+
+.details-section {
+    background: #2a2a35;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.details-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #5d9cec;
+}
+
+@media screen and (max-width: 768px) {
+    .info-inline {
+        flex-direction: column;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .tree-header {
+        flex-wrap: wrap;
+    }
+}
