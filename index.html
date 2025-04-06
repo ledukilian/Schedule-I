@@ -82,7 +82,7 @@
 
     <div class="footer">
         <a href="https://github.com/ledukilian/Schedule-I" target="_blank" class="text-blue-900 hover:text-blue-700">GitHub</a>
-        <p class="version"> Version 0.4.0</p>
+        <p class="version"> Version 0.4.1</p>
         <p style="margin-top:5px">Made with ❤️ by <a href="https://github.com/ledukilian" target="_blank" class="text-blue-900 hover:text-blue-700">Kilian LE DU</a></p>
     </div>
 </div>
@@ -414,7 +414,7 @@
             const option = document.createElement('option');
             option.value = effect.multiplier;
             option.dataset.name = effect.name;
-            option.textContent = `${effect.name} (${effect.multiplier})`;
+            option.textContent = `${effect.name} (x${effect.multiplier})`;
             effectSelector.appendChild(option);
         });
 
