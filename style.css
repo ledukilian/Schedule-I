@@ -37,6 +37,10 @@ body::before {
     z-index: -1;
 }
 
+.tab-content {
+    text-align: center;
+}
+
 .color-yellow {
     color: #FDDC00;
 }

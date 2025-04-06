@@ -43,7 +43,19 @@
 
     <!-- Effects -->
     <section class="tree-view tab-content" id="effects-content" style="display:none;">
-        🚧 Soon
+        <table>
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Poids (x)</th>
+                <th>Type</th>
+                <th>Effet</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </section>
 
     <!-- Calculator -->
@@ -218,7 +230,7 @@
 
     // Fonction pour tenter de charger les données de l'API, sinon utiliser les données initiales
     function loadData() {
-        fetch('https://ledukilian.github.io/Schedule-I/data.json')
+        fetch('https://ledukilian.github.io/Schedule-I/recipes.json')
             .then(response => response.json())
             .then(data => {
                 // Séparez vos données en deux catégories si nécessaire
@@ -242,6 +254,28 @@
                 console.log('Utilisation des données initiales:', error);
                 const recipesContent = document.getElementById('recipes-content');
                 createTree(initialData, recipesContent);
+            });
+
+        fetch('https://ledukilian.github.io/Schedule-I/effects.json')
+            .then(response => response.json())
+            .then(data => {
+                effectsData = data;
+
+                const effectsContent = document.getElementById('effects-content').querySelector('tbody');
+                effectsContent.innerHTML = '';
+                effectsData.forEach(effect => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td>${effect.name}</td>
+                    <td>${effect.multiplier}</td>
+                    <td>${effect.type || 'N/A'}</td>
+                    <td>${effect.description || 'N/A'}</td>
+                `;
+                    effectsContent.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.log('Erreur lors du chargement des effets:', error);
             });
     }
 
