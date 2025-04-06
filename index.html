@@ -46,10 +46,10 @@
         <table>
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Poids (x)</th>
+                <th>Name</th>
+                <th>Multiplier</th>
                 <th>Type</th>
-                <th>Effet</th>
+                <th class="text-left">Effect</th>
             </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@
 
     <div class="footer">
         <a href="https://github.com/ledukilian/Schedule-I" target="_blank" class="text-blue-900 hover:text-blue-700">GitHub</a>
-        <p class="version"> Version 0.2.1</p>
+        <p class="version"> Version 0.3.1</p>
         <p style="margin-top:5px">Made with ❤️ by <a href="https://github.com/ledukilian" target="_blank" class="text-blue-900 hover:text-blue-700">Kilian LE DU</a></p>
     </div>
 </div>
@@ -266,10 +266,10 @@
                 effectsData.forEach(effect => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                    <td>${effect.name}</td>
+                    <td style="color: ${effect.color};">${effect.name}</td>
                     <td>${effect.multiplier}</td>
-                    <td>${effect.type || 'N/A'}</td>
-                    <td>${effect.description || 'N/A'}</td>
+                    <td>${effect.type || ''}</td>
+                    <td class="text-left">${effect.description || ''}</td>
                 `;
                     effectsContent.appendChild(row);
                 });

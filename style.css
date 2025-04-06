@@ -37,8 +37,160 @@ body::before {
     z-index: -1;
 }
 
+/* Styles pour les tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* En-têtes de tableau */
+thead {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+}
+
+thead tr {
+    height: 50px;
+}
+
+th {
+    padding: 12px 15px;
+    font-weight: 600;
+    text-align: left;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+th:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Corps du tableau */
+tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+tbody tr:hover {
+    background-color: rgba(76, 175, 80, 0.05);
+}
+
+td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+}
+
+/* Cellules avec valeurs numériques */
+td.numeric {
+    text-align: right;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+/* Styles pour les données spécifiques */
+td.profit {
+    color: #2E7D32;
+}
+
+td.cost {
+    color: #C62828;
+}
+
+td.sell {
+    color: #1565C0;
+}
+
+/* Styles pour les statuts ou tags */
+td .status-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+    text-align: center;
+}
+
+td .status-success {
+    background-color: rgba(46, 125, 50, 0.1);
+    color: #2E7D32;
+}
+
+td .status-warning {
+    background-color: rgba(245, 127, 23, 0.1);
+    color: #F57F17;
+}
+
+td .status-error {
+    background-color: rgba(198, 40, 40, 0.1);
+    color: #C62828;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table {
+        border-radius: 6px;
+    }
+
+    th, td {
+        padding: 10px 12px;
+    }
+
+    thead tr {
+        height: 40px;
+    }
+}
+
+/* Style pour les tables avec bordures externes uniquement */
+table.border-outside {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour les tables avec toutes les bordures */
+table.border-all td,
+table.border-all th {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Style pour les tables avec bordures de lignes uniquement */
+table.border-rows tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Animation subtile lors du chargement de la table */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+table {
+    animation: fadeIn 0.4s ease-out;
+}
+
 .tab-content {
     text-align: center;
+}
+
+.text-left {
+    text-align: left;
 }
 
 .color-yellow {
