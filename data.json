@@ -611,7 +611,152 @@
     "name": "💎 Méthamphétamine",
     "price": "10,00 €",
     "color": "#5d9cec",
-    "children": []
+    "children": [
+      {
+        "additif": "💊 Viagra",
+        "prixAdditif": "4 €",
+        "obtenu": "Banana Thunderfuck",
+        "vente": "102 €",
+        "coutProd": "18,00 €",
+        "marge": "84 €",
+        "children": []
+      },
+      {
+        "additif": "🥛 Horse Semen",
+        "prixAdditif": "9 €",
+        "obtenu": "Banana Balls",
+        "vente": "106 €",
+        "coutProd": "23,00 €",
+        "marge": "83 €",
+        "children": []
+      },
+      {
+        "additif": "🧴 Addy",
+        "prixAdditif": "9 €",
+        "obtenu": "Big Thunderfuck",
+        "vente": "101 €",
+        "coutProd": "23,00 €",
+        "marge": "78 €",
+        "children": []
+      },
+      {
+        "additif": "🍶 Iodine",
+        "prixAdditif": "8 €",
+        "obtenu": "Pink Mint",
+        "vente": "99 €",
+        "coutProd": "22,00 €",
+        "marge": "77 €",
+        "children": []
+      },
+      {
+        "additif": "🔋 Battery",
+        "prixAdditif": "8 €",
+        "obtenu": "Stinky Cock",
+        "vente": "98 €",
+        "coutProd": "22,00 €",
+        "marge": "76 €",
+        "children": []
+      },
+      {
+        "additif": "🌶️ Chili",
+        "prixAdditif": "7 €",
+        "obtenu": "Mega Smegma",
+        "vente": "97 €",
+        "coutProd": "21,00 €",
+        "marge": "76 €",
+        "children": []
+      },
+      {
+        "additif": "🫛 Mega bean",
+        "prixAdditif": "7 €",
+        "obtenu": "Super Thunderfuck",
+        "vente": "95 €",
+        "coutProd": "21,00 €",
+        "marge": "74 €",
+        "children": []
+      },
+      {
+        "additif": "⛽ Motor oil",
+        "prixAdditif": "6 €",
+        "obtenu": "Afghan Shart",
+        "vente": "94 €",
+        "coutProd": "20,00 €",
+        "marge": "74 €",
+        "children": []
+      },
+      {
+        "additif": "🧼 Mouth wash",
+        "prixAdditif": "4 €",
+        "obtenu": "Death Ghost",
+        "vente": "91 €",
+        "coutProd": "18,00 €",
+        "marge": "73 €",
+        "children": []
+      },
+      {
+        "additif": "⚡ Energy Drink",
+        "prixAdditif": "6 €",
+        "obtenu": "Nightmare Ghost",
+        "vente": "92 €",
+        "coutProd": "20,00 €",
+        "marge": "72 €",
+        "children": []
+      },
+      {
+        "additif": "🥧 Donuts",
+        "prixAdditif": "3 €",
+        "obtenu": "Shiny Balls",
+        "vente": "87 €",
+        "coutProd": "17,00 €",
+        "marge": "70 €",
+        "children": []
+      },
+      {
+        "additif": "💊 Paracetamol",
+        "prixAdditif": "3 €",
+        "obtenu": "Sex Rhino",
+        "vente": "87 €",
+        "coutProd": "17,00 €",
+        "marge": "70 €",
+        "children": []
+      },
+      {
+        "additif": "🧴 Flu Medecine",
+        "prixAdditif": "5 €",
+        "obtenu": "California Thunderfuck",
+        "vente": "88 €",
+        "coutProd": "19,00 €",
+        "marge": "69 €",
+        "children": []
+      },
+      {
+        "additif": "🥤 Cuke",
+        "prixAdditif": "2 €",
+        "obtenu": "Ice Cream Grool",
+        "vente": "85 €",
+        "coutProd": "16,00 €",
+        "marge": "69 €",
+        "children": []
+      },
+      {
+        "additif": "🍌 Banana",
+        "prixAdditif": "2 €",
+        "obtenu": "Purple Cock",
+        "vente": "84 €",
+        "coutProd": "16,00 €",
+        "marge": "68 €",
+        "children": []
+      },
+      {
+        "additif": "⛽ Gasoline",
+        "prixAdditif": "5 €",
+        "obtenu": "LA Grool",
+        "vente": "70 €",
+        "coutProd": "19,00 €",
+        "marge": "51 €",
+        "children": []
+      }
+    ]
   },
   {
     "name": "❄️ Cocaïne",
