@@ -127,7 +127,7 @@
   },
   {
     "name": "Lethal",
-    "multiplier": null,
+    "multiplier": 0,
     "type": null,
     "description": "Causes user to die. Currently only available by cheating/save game editing.",
     "color": "#ffffff"
