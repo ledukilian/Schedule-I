@@ -1,0 +1,17 @@
+[
+  {
+    "emoji": "🌿",
+    "drug": "Weed",
+    "price": 35
+  },
+  {
+    "emoji": "💎",
+    "drug": "Meth",
+    "price": 70
+  },
+  {
+    "emoji": "❄️",
+    "drug": "Cocaine",
+    "price": 150
+  }
+]

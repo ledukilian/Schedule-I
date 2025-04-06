@@ -1,0 +1,18 @@
+[
+  { "ingredient": "🍌 Banana", "price": 2 },
+  { "ingredient": "🥤 Cuke", "price": 2 },
+  { "ingredient": "🥧 Donuts", "price": 3 },
+  { "ingredient": "💊 Paracetamol", "price": 3 },
+  { "ingredient": "🧼 Mouth wash", "price": 4 },
+  { "ingredient": "💊 Viagra", "price": 4 },
+  { "ingredient": "🧴 Flu Medecine", "price": 5 },
+  { "ingredient": "⛽ Gasoline", "price": 5 },
+  { "ingredient": "⚡ Energy Drink", "price": 6 },
+  { "ingredient": "⛽ Motor oil", "price": 6 },
+  { "ingredient": "🌶️ Chili", "price": 7 },
+  { "ingredient": "🫛 Mega bean", "price": 7 },
+  { "ingredient": "🔋 Battery", "price": 8 },
+  { "ingredient": "🍶 Iodine", "price": 8 },
+  { "ingredient": "🧴 Addy", "price": 9 },
+  { "ingredient": "🥛 Horse Semen", "price": 9 }
+]
