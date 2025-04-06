@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe guide</title>
+    <title>Cooking guide</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="src/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
         <img src="src/logo.png" alt="Logo Schedule-I" class="logo">
     </div>
     <h1>
-        <!--span class="color-green">Schedule-I :</span>-->Recipe guide
+        <!--span class="color-green">Schedule-I :</span>-->Cooking guide
     </h1>
 
     <div class="tabs">
@@ -60,12 +60,29 @@
 
     <!-- Calculator -->
     <section class="tree-view tab-content" id="calculator-content" style="display:none;">
-        🚧 Soon
+        <table id="recipes-table">
+            <thead>
+            <tr>
+                <th>Drug</th>
+                <th>Price</th>
+                <th>Ingredient</th>
+                <th>Effect</th>
+                <th>Multiplier</th>
+                <th>New price</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="recipes-body">
+            <!-- Les lignes seront ajoutées ici dynamiquement -->
+            </tbody>
+        </table>
+
+        <button id="add-row-btn" class="btn">Add a line</button>
     </section>
 
     <div class="footer">
         <a href="https://github.com/ledukilian/Schedule-I" target="_blank" class="text-blue-900 hover:text-blue-700">GitHub</a>
-        <p class="version"> Version 0.3.2</p>
+        <p class="version"> Version 0.4.0</p>
         <p style="margin-top:5px">Made with ❤️ by <a href="https://github.com/ledukilian" target="_blank" class="text-blue-900 hover:text-blue-700">Kilian LE DU</a></p>
     </div>
 </div>
@@ -73,6 +90,8 @@
     // Structure des données
     const initialData = [];
     let recipesData = [];
+    let ingredientsData = [];
+    let drugsData = [];
     let effectsData = [];
 
     // Fonction pour créer l'arborescence
@@ -277,6 +296,329 @@
             .catch(error => {
                 console.log('Erreur lors du chargement des effets:', error);
             });
+
+        fetch('https://ledukilian.github.io/Schedule-I/ingredients.json')
+            .then(response => response.json())
+            .then(data => {
+                ingredientsData = data;
+            })
+            .catch(error => {
+                console.log('Erreur lors du chargement des ingrédients:', error);
+            });
+
+        fetch('https://ledukilian.github.io/Schedule-I/drugs.json')
+            .then(response => response.json())
+            .then(data => {
+                drugsData = data;
+            })
+            .catch(error => {
+                console.log('Erreur lors du chargement des drogues:', error);
+            });
+
+    }
+
+    // Génère une ID unique pour chaque ligne
+    function generateRowId() {
+        return 'row-' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Crée une nouvelle ligne de recette
+    function createRecipeRow(isFirstRow = false, previousResult = null) {
+        const rowId = generateRowId();
+        const row = document.createElement('tr');
+        row.className = 'recipe-row';
+        row.dataset.rowId = rowId;
+
+        // Cellule du sélecteur de médicament
+        const drugCell = document.createElement('td');
+        if (isFirstRow) {
+            // Première ligne: sélecteur de médicament actif
+            const drugSelector = document.createElement('select');
+            drugSelector.className = 'drug-selector';
+            drugSelector.dataset.rowId = rowId;
+
+            // Option par défaut
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "";
+            defaultOption.textContent = "";
+            drugSelector.appendChild(defaultOption);
+
+            // Options de médicaments
+            drugsData.forEach(drug => {
+                const option = document.createElement('option');
+                option.value = drug.price;
+                option.dataset.name = drug.drug;
+                option.textContent = drug.drug;
+                drugSelector.appendChild(option);
+            });
+
+            drugCell.appendChild(drugSelector);
+        } else {
+            // Lignes suivantes: afficher le résultat de la ligne précédente
+            const resultDisplay = document.createElement('input');
+            resultDisplay.type = 'text';
+            resultDisplay.readOnly = true;
+            resultDisplay.value = previousResult || '';
+            drugCell.appendChild(resultDisplay);
+        }
+        row.appendChild(drugCell);
+
+        // Cellule d'affichage du prix du médicament
+        const drugPriceCell = document.createElement('td');
+        const drugPriceDisplay = document.createElement('input');
+        drugPriceDisplay.className = 'drug-price-display';
+        drugPriceDisplay.type = 'text';
+        drugPriceDisplay.readOnly = true;
+        drugPriceDisplay.dataset.rowId = rowId;
+        drugPriceCell.appendChild(drugPriceDisplay);
+        row.appendChild(drugPriceCell);
+
+        // Cellule du sélecteur d'ingrédient
+        const ingredientCell = document.createElement('td');
+        const ingredientSelector = document.createElement('select');
+        ingredientSelector.className = 'ingredient-selector';
+        ingredientSelector.dataset.rowId = rowId;
+
+        // Option par défaut
+        const ingredientDefaultOption = document.createElement('option');
+        ingredientDefaultOption.value = "";
+        ingredientDefaultOption.textContent = "";
+        ingredientSelector.appendChild(ingredientDefaultOption);
+
+        // Options d'ingrédients
+        ingredientsData.forEach(ingredient => {
+            const option = document.createElement('option');
+            option.value = ingredient.price;
+            option.dataset.name = ingredient.ingredient;
+            option.textContent = ingredient.ingredient;
+            ingredientSelector.appendChild(option);
+        });
+
+        ingredientCell.appendChild(ingredientSelector);
+        row.appendChild(ingredientCell);
+
+        // Cellule du sélecteur d'effet
+        const effectCell = document.createElement('td');
+        const effectSelector = document.createElement('select');
+        effectSelector.className = 'effect-selector';
+        effectSelector.dataset.rowId = rowId;
+
+        // Option par défaut
+        const effectDefaultOption = document.createElement('option');
+        effectDefaultOption.value = "";
+        effectDefaultOption.textContent = "";
+        effectSelector.appendChild(effectDefaultOption);
+
+        // Options d'effets
+        effectsData.sort((a, b) => a.multiplier + b.multiplier).forEach(effect => {
+            const option = document.createElement('option');
+            option.value = effect.multiplier;
+            option.dataset.name = effect.name;
+            option.textContent = `${effect.name} (${effect.multiplier})`;
+            effectSelector.appendChild(option);
+        });
+
+        effectCell.appendChild(effectSelector);
+        row.appendChild(effectCell);
+
+        // Cellule d'affichage du multiplicateur
+        const multiplierCell = document.createElement('td');
+        const multiplierDisplay = document.createElement('input');
+        multiplierDisplay.className = 'multiplier-display';
+        multiplierDisplay.type = 'text';
+        multiplierDisplay.readOnly = true;
+        multiplierDisplay.dataset.rowId = rowId;
+        multiplierCell.appendChild(multiplierDisplay);
+        row.appendChild(multiplierCell);
+
+        // Cellule du prix final
+        const finalPriceCell = document.createElement('td');
+        const finalPriceInput = document.createElement('input');
+        finalPriceInput.className = 'final-price';
+        finalPriceInput.type = 'text';
+        finalPriceInput.readOnly = true;
+        finalPriceInput.dataset.rowId = rowId;
+        finalPriceCell.appendChild(finalPriceInput);
+        row.appendChild(finalPriceCell);
+
+        // Cellule des actions
+        const actionCell = document.createElement('td');
+        actionCell.className = 'action-cell';
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'btn btn-remove';
+        removeBtn.textContent = 'Delete';
+        removeBtn.dataset.rowId = rowId;
+        removeBtn.addEventListener('click', function() {
+            removeRecipeRow(rowId);
+        });
+        actionCell.appendChild(removeBtn);
+        row.appendChild(actionCell);
+
+        // Ajouter la ligne au tableau
+        document.getElementById('recipes-body').appendChild(row);
+
+        // Ajouter les écouteurs d'événements pour cette ligne
+        if (isFirstRow) {
+            const drugSel = document.querySelector(`.drug-selector[data-row-id="${rowId}"]`);
+            if (drugSel) {
+                drugSel.addEventListener('change', function() {
+                    calculateRowPrice(rowId);
+                    updateSubsequentRows(rowId);
+                });
+            }
+        }
+
+        const ingredientSel = document.querySelector(`.ingredient-selector[data-row-id="${rowId}"]`);
+        const effectSel = document.querySelector(`.effect-selector[data-row-id="${rowId}"]`);
+
+        if (ingredientSel) {
+            ingredientSel.addEventListener('change', function() {
+                calculateRowPrice(rowId);
+                updateSubsequentRows(rowId);
+            });
+        }
+
+        if (effectSel) {
+            effectSel.addEventListener('change', function() {
+                calculateRowPrice(rowId);
+                updateSubsequentRows(rowId);
+            });
+        }
+
+        return rowId;
+    }
+
+    // Calcule le prix pour une ligne spécifique
+    function calculateRowPrice(rowId) {
+        const row = document.querySelector(`tr[data-row-id="${rowId}"]`);
+        if (!row) return;
+
+        let initialPrice = 0;
+        let drugName = '';
+
+        // Vérifier s'il s'agit de la première ligne
+        const drugSelector = row.querySelector('.drug-selector');
+        if (drugSelector) {
+            // C'est la première ligne
+            initialPrice = parseFloat(drugSelector.value) || 0;
+            if (drugSelector.selectedIndex > 0) {
+                drugName = drugSelector.options[drugSelector.selectedIndex].dataset.name;
+            }
+        } else {
+            // C'est une ligne suivante, il faut prendre le prix de la ligne précédente
+            const prevRows = getPreviousRows(row);
+            const lastPrevRow = prevRows[prevRows.length - 1];
+            if (lastPrevRow) {
+                const prevFinalPrice = lastPrevRow.querySelector('.final-price');
+                initialPrice = parseFloat(prevFinalPrice.value) || 0;
+
+                // Trouver le nom du médicament soit de la première ligne, soit d'un input
+                const firstRow = document.querySelector('#recipes-body tr:first-child');
+                const firstRowDrugSelector = firstRow.querySelector('.drug-selector');
+                if (firstRowDrugSelector && firstRowDrugSelector.selectedIndex > 0) {
+                    drugName = firstRowDrugSelector.options[firstRowDrugSelector.selectedIndex].dataset.name;
+                }
+            }
+        }
+
+        // Affichage du prix initial
+        const drugPriceDisplay = row.querySelector('.drug-price-display');
+        if (drugPriceDisplay) {
+            drugPriceDisplay.value = initialPrice ? `${initialPrice.toFixed(2)} €` : '';
+        }
+
+        // Calcul du multiplicateur pour cette ligne
+        const effectSelector = row.querySelector('.effect-selector');
+        const multiplier = effectSelector ? (1+parseFloat(effectSelector.value)) : 1;
+
+        // Affichage du multiplicateur
+        const multiplierDisplay = row.querySelector('.multiplier-display');
+        if (multiplierDisplay) {
+            multiplierDisplay.value = multiplier ? `x${multiplier.toFixed(2)}` : '';
+        }
+
+        // Calcul du prix final (drug price + (1+multiplicateur))
+        const finalPrice = initialPrice * (multiplier);
+
+        // Affichage du prix final
+        const finalPriceInput = row.querySelector('.final-price');
+        if (finalPriceInput) {
+            finalPriceInput.value = finalPrice ? `${finalPrice.toFixed(2)} €` : '';
+            // Stocker la valeur numérique pour les calculs ultérieurs
+            finalPriceInput.dataset.value = finalPrice;
+        }
+
+        return {
+            price: finalPrice,
+            name: ''
+        };
+    }
+
+    // Obtenir toutes les lignes avant celle spécifiée
+    function getPreviousRows(row) {
+        const allRows = Array.from(document.querySelectorAll('#recipes-body tr'));
+        const rowIndex = allRows.indexOf(row);
+        return allRows.slice(0, rowIndex);
+    }
+
+    // Mettre à jour toutes les lignes suivantes
+    function updateSubsequentRows(changedRowId) {
+        const changedRow = document.querySelector(`tr[data-row-id="${changedRowId}"]`);
+        if (!changedRow) return;
+
+        const allRows = Array.from(document.querySelectorAll('#recipes-body tr'));
+        const changedRowIndex = allRows.indexOf(changedRow);
+
+        // Mettre à jour toutes les lignes suivantes
+        for (let i = changedRowIndex + 1; i < allRows.length; i++) {
+            const currentRow = allRows[i];
+            const currentRowId = currentRow.dataset.rowId;
+            const previousRow = allRows[i - 1];
+            const previousResult = calculateRowPrice(previousRow.dataset.rowId);
+
+            // Mettre à jour le médicament de la ligne actuelle
+            const drugInput = currentRow.querySelector('td:first-child input');
+            if (drugInput && previousResult) {
+                drugInput.value = previousResult.name || '';
+            }
+
+            // Recalculer le prix pour cette ligne
+            calculateRowPrice(currentRowId);
+        }
+    }
+
+    // Supprimer une ligne de recette
+    function removeRecipeRow(rowId) {
+        const row = document.querySelector(`tr[data-row-id="${rowId}"]`);
+        if (!row) return;
+
+        // Trouver l'index de la ligne à supprimer
+        const allRows = Array.from(document.querySelectorAll('#recipes-body tr'));
+        const removedRowIndex = allRows.indexOf(row);
+
+        // Supprimer la ligne
+        row.remove();
+
+        // Mettre à jour les lignes suivantes
+        if (removedRowIndex >= 0 && removedRowIndex < allRows.length - 1) {
+            const rowBeforeRemoved = removedRowIndex > 0 ? allRows[removedRowIndex - 1] : null;
+            const rowAfterRemoved = allRows[removedRowIndex + 1];
+
+            if (rowBeforeRemoved && rowAfterRemoved) {
+                // Mettre à jour la première ligne après la suppression
+                const previousResult = calculateRowPrice(rowBeforeRemoved.dataset.rowId);
+                const drugInput = rowAfterRemoved.querySelector('td:first-child input');
+                if (drugInput && previousResult) {
+                    drugInput.value = previousResult.name || '';
+                }
+
+                // Recalculer toutes les lignes suivantes
+                for (let i = removedRowIndex; i < allRows.length; i++) {
+                    if (i >= allRows.length || !allRows[i]) continue;
+                    calculateRowPrice(allRows[i].dataset.rowId);
+                }
+            }
+        }
     }
 
     // Gestion des onglets
@@ -286,6 +628,7 @@
         // Gestion des onglets
         const tabButtons = document.querySelectorAll('.tab-button');
 
+        // Ajouter un événement de clic à chaque bouton d'onglet
         tabButtons.forEach(button => {
             button.addEventListener('click', function() {
                 // Réinitialiser tous les boutons et contenus
@@ -299,6 +642,24 @@
                 const tabName = this.getAttribute('data-tab');
                 document.getElementById(`${tabName}-content`).style.display = 'block';
             });
+        });
+
+        // Calculateur
+        // Ajouter la première ligne
+        setTimeout(() => createRecipeRow(true), 1000); // 1000 milliseconds = 1 second
+
+        // Ajouter l'écouteur pour le bouton d'ajout de ligne
+        document.getElementById('add-row-btn').addEventListener('click', function() {
+            const allRows = document.querySelectorAll('#recipes-body tr');
+            const lastRow = allRows[allRows.length - 1];
+
+            if (lastRow) {
+                const lastRowId = lastRow.dataset.rowId;
+                const previousResult = calculateRowPrice(lastRowId);
+                createRecipeRow(false, previousResult.name || '');
+            } else {
+                createRecipeRow(true);
+            }
         });
     });
 </script>
