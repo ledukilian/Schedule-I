@@ -1,6 +1,6 @@
 [
   {
-    "name": "🌿 OG Kush",
+    "name": "🌿 Weed : OG Kush",
     "family": "WEED",
     "color": "#88bd7e",
     "price": "10,00 €",
@@ -152,7 +152,7 @@
     ]
   },
   {
-    "name": "🌿 Sour Diesel",
+    "name": "🌿 Weed : Sour Diesel",
     "family": "WEED",
     "color": "#d5deab",
     "price": "10,00 €",
@@ -304,7 +304,7 @@
     ]
   },
   {
-    "name": "🌿 Green Crack",
+    "name": "🌿 Weed : Green Crack",
     "family": "WEED",
     "color": "#64e385",
     "price": "10,00 €",
@@ -456,7 +456,7 @@
     ]
   },
   {
-    "name": "🌿 Granddady Purple",
+    "name": "🌿 Weed : Granddady Purple",
     "family": "WEED",
     "color": "#b493c9",
     "price": "10,00 €",
@@ -608,7 +608,8 @@
     ]
   },
   {
-    "name": "💎 Méthamphétamine",
+    "name": "💎 Meth",
+    "family": "METH",
     "price": "10,00 €",
     "color": "#5d9cec",
     "children": [
@@ -759,7 +760,7 @@
     ]
   },
   {
-    "name": "❄️ Cocaïne",
+    "name": "❄️ Cocaine",
     "family": "COCAIN",
     "price": "80,00 €",
     "color": "white",
