@@ -29,21 +29,42 @@
     <h1>
         <!--span class="color-green">Schedule-I :</span>-->Recipe guide
     </h1>
-    <section class="tree-view" id="main-tree">
-        <!-- La structure sera générée par JavaScript -->
+
+    <div class="tabs">
+        <button class="tab-button active" data-tab="recipes">Recipes</button>
+        <button class="tab-button" data-tab="effects">Effects</button>
+        <button class="tab-button" data-tab="calculator">Calculator</button>
+    </div>
+
+    <!-- Recipes -->
+    <section class="tree-view tab-content" id="recipes-content">
+
     </section>
+
+    <!-- Effects -->
+    <section class="tree-view tab-content" id="effects-content" style="display:none;">
+        🚧 Soon
+    </section>
+
+    <!-- Calculator -->
+    <section class="tree-view tab-content" id="calculator-content" style="display:none;">
+        🚧 Soon
+    </section>
+
     <div class="footer">
         <a href="https://github.com/ledukilian/Schedule-I" target="_blank" class="text-blue-900 hover:text-blue-700">GitHub</a>
-        <p class="version"> Version 0.2.0</p>
+        <p class="version"> Version 0.2.1</p>
         <p style="margin-top:5px">Made with ❤️ by <a href="https://github.com/ledukilian" target="_blank" class="text-blue-900 hover:text-blue-700">Kilian LE DU</a></p>
     </div>
 </div>
 <script>
     // Structure des données
     const initialData = [];
+    let recipesData = [];
+    let effectsData = [];
 
     // Fonction pour créer l'arborescence
-    function createTree(data, parentElement, level = 0) {
+    function createTree(data, parentElement, level = 0, isFirstLevel = true) {
         // Sort data by "marge" in descending order
         data.sort((a, b) => {
             if (a.marge && b.marge) {
@@ -92,10 +113,10 @@
                 treeHeader.innerHTML = `
                     <span class="mobile-margin-b-15">${item.obtenu}</span>
                     <div class="info-inline">
-                        <span class="mobile-margin-y-5 margin info-pill">${item.additif.split(' ')[0]} ${item.additif.split(' ').slice(1).join(' ')}</span>
-                        <span class="mobile-margin-y-5 info-pill profit">Profit: <strong>${item.marge}</strong></span>
-                        <span class="mobile-margin-y-5 info-pill sell">Sell: <strong>${item.vente}</strong></span>
-                        <span class="mobile-margin-y-5 info-pill cost">Cost: <strong>${item.coutProd}</strong></span>
+                        <span class="info-pill margin">${item.additif.split(' ')[0]} ${item.additif.split(' ').slice(1).join(' ')}</span>
+                        <span class="info-pill profit">Profit: <strong>${item.marge}</strong></span>
+                        <span class="info-pill sell">Sell: <strong>${item.vente}</strong></span>
+                        <span class="info-pill cost">Cost: <strong>${item.coutProd}</strong></span>
                     </div>
                 `;
             }
@@ -128,31 +149,70 @@
 
             // Si l'élément a des enfants, créer récursivement
             if (item.children && item.children.length > 0) {
-                createTree(item.children, treeContent, level + 1);
+                // Pour le premier niveau, créer des enfants avec la fonctionnalité dépliante
+                // Pour les niveaux suivants, simplement afficher le contenu sans pliage
+                if (isFirstLevel) {
+                    createTree(item.children, treeContent, level + 1, false);
+                } else {
+                    // Pour les niveaux non-premier, afficher directement sans pliage
+                    item.children.forEach(child => {
+                        const childItem = document.createElement('div');
+                        childItem.className = `tree-item level-${level + 1} no-toggle`;
+
+                        if (child.additif) {
+                            childItem.innerHTML = `
+                                <div class="tree-header">
+                                    <span class="mobile-margin-b-15">${child.obtenu}</span>
+                                    <div class="info-inline">
+                                        <span class="info-pill margin">${child.additif.split(' ')[0]} ${child.additif.split(' ').slice(1).join(' ')}</span>
+                                        <span class="info-pill profit">Profit: <strong>${child.marge}</strong></span>
+                                        <span class="info-pill sell">Sell: <strong>${child.vente}</strong></span>
+                                        <span class="info-pill cost">Cost: <strong>${child.coutProd}</strong></span>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            childItem.innerHTML = `
+                                <div class="tree-header">
+                                    <span>${child.name || 'Option'}</span>
+                                </div>
+                            `;
+                        }
+
+                        // Si l'enfant a un détail, l'ajouter directement
+                        if (child.detail) {
+                            const detailSection = document.createElement('div');
+                            detailSection.className = 'details-section';
+                            detailSection.innerHTML = `
+                                <div class="details-title">Détails</div>
+                                <div>${child.detail}</div>
+                            `;
+                            childItem.appendChild(detailSection);
+                        }
+
+                        treeContent.appendChild(childItem);
+                    });
+                }
             }
 
             parentElement.appendChild(treeItem);
 
-            // Ajouter l'événement de clic pour montrer/cacher le contenu
-            treeHeader.addEventListener('click', function() {
-                treeContent.classList.toggle('active');
-                treeHeader.classList.toggle('active');
-                const toggle = treeHeader.querySelector('.tree-toggle');
-                if (toggle) {
-                    if (treeContent.classList.contains('active')) {
-                        toggle.textContent = '▼';
-                    } else {
-                        toggle.textContent = '▶';
+            // Ajouter l'événement de clic pour montrer/cacher le contenu,
+            // mais seulement pour le premier niveau
+            if (isFirstLevel) {
+                treeHeader.addEventListener('click', function() {
+                    treeContent.classList.toggle('active');
+                    treeHeader.classList.toggle('active');
+                    const toggle = treeHeader.querySelector('.tree-toggle');
+                    if (toggle) {
+                        if (treeContent.classList.contains('active')) {
+                            toggle.textContent = '▼';
+                        } else {
+                            toggle.textContent = '▶';
+                        }
                     }
-                }
-            });
-
-            // Déplier automatiquement le premier élément pour la démo
-            /*if (level === 0 && index === 0) {
-                setTimeout(() => {
-                    treeHeader.click();
-                }, 500);
-            }*/
+                });
+            }
         });
     }
 
@@ -161,19 +221,52 @@
         fetch('https://ledukilian.github.io/Schedule-I/data.json')
             .then(response => response.json())
             .then(data => {
-                const mainTree = document.getElementById('main-tree');
-                mainTree.innerHTML = ''; // Clear any existing content
-                createTree(data, mainTree);
+                // Séparez vos données en deux catégories si nécessaire
+                recipesData = data.filter(item => item.type === 'recipe' || !item.type);
+                effectsData = data.filter(item => item.type === 'effect');
+
+                // Si vous n'avez pas de propriété type, utilisez toutes les données pour les recettes
+                if (recipesData.length === 0) recipesData = data;
+
+                const recipesContent = document.getElementById('recipes-content');
+                recipesContent.innerHTML = ''; // Clear any existing content
+                createTree(recipesData, recipesContent);
+
+                if (effectsData.length > 0) {
+                    const effectsContent = document.getElementById('effects-content');
+                    effectsContent.innerHTML = ''; // Clear any existing content
+                    createTree(effectsData, effectsContent);
+                }
             })
             .catch(error => {
                 console.log('Utilisation des données initiales:', error);
-                const mainTree = document.getElementById('main-tree');
-                createTree(initialData, mainTree);
+                const recipesContent = document.getElementById('recipes-content');
+                createTree(initialData, recipesContent);
             });
     }
 
-    // Charger les données
-    document.addEventListener('DOMContentLoaded', loadData);
+    // Gestion des onglets
+    document.addEventListener('DOMContentLoaded', function() {
+        loadData();
+
+        // Gestion des onglets
+        const tabButtons = document.querySelectorAll('.tab-button');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Réinitialiser tous les boutons et contenus
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+
+                // Activer l'onglet sélectionné
+                this.classList.add('active');
+                const tabName = this.getAttribute('data-tab');
+                document.getElementById(`${tabName}-content`).style.display = 'block';
+            });
+        });
+    });
 </script>
 </body>
 </html>
