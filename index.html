@@ -495,62 +495,74 @@
 
         let initialPrice = 0;
         let drugName = '';
+        let totalEffectMultiplier = 0; // Track the sum of all effect multipliers
 
-        // Vérifier s'il s'agit de la première ligne
+        // Check if it's the first row
         const drugSelector = row.querySelector('.drug-selector');
         if (drugSelector) {
-            // C'est la première ligne
+            // It's the first row
             initialPrice = parseFloat(drugSelector.value) || 0;
             if (drugSelector.selectedIndex > 0) {
                 drugName = drugSelector.options[drugSelector.selectedIndex].dataset.name;
             }
+
+            // For the first row, get only its own multiplier
+            const effectSelector = row.querySelector('.effect-selector');
+            totalEffectMultiplier = effectSelector ? parseFloat(effectSelector.value) : 0;
         } else {
-            // C'est une ligne suivante, il faut prendre le prix de la ligne précédente
+            // It's a subsequent row - get the price from the previous row
             const prevRows = getPreviousRows(row);
             const lastPrevRow = prevRows[prevRows.length - 1];
             if (lastPrevRow) {
-                const prevFinalPrice = lastPrevRow.querySelector('.final-price');
-                initialPrice = parseFloat(prevFinalPrice.value) || 0;
-
-                // Trouver le nom du médicament soit de la première ligne, soit d'un input
+                // Get the original initial price from the first row
                 const firstRow = document.querySelector('#recipes-body tr:first-child');
                 const firstRowDrugSelector = firstRow.querySelector('.drug-selector');
+                initialPrice = firstRowDrugSelector ? parseFloat(firstRowDrugSelector.value) || 0 : 0;
+
                 if (firstRowDrugSelector && firstRowDrugSelector.selectedIndex > 0) {
                     drugName = firstRowDrugSelector.options[firstRowDrugSelector.selectedIndex].dataset.name;
+                }
+
+                // Sum up all effect multipliers from all rows up to this one
+                totalEffectMultiplier = 0;
+                for (const prevRow of [...prevRows, row]) {
+                    const rowEffectSelector = prevRow.querySelector('.effect-selector');
+                    if (rowEffectSelector) {
+                        totalEffectMultiplier += parseFloat(rowEffectSelector.value) || 0;
+                    }
                 }
             }
         }
 
-        // Affichage du prix initial
+        // Display the initial price
         const drugPriceDisplay = row.querySelector('.drug-price-display');
         if (drugPriceDisplay) {
             drugPriceDisplay.value = initialPrice ? `${initialPrice.toFixed(2)} €` : '';
         }
 
-        // Calcul du multiplicateur pour cette ligne
+        // Display the multiplier for this row
         const effectSelector = row.querySelector('.effect-selector');
-        const multiplier = effectSelector ? (1+parseFloat(effectSelector.value)) : 1;
+        const rowMultiplier = effectSelector ? parseFloat(effectSelector.value) : 0;
 
-        // Affichage du multiplicateur
         const multiplierDisplay = row.querySelector('.multiplier-display');
         if (multiplierDisplay) {
-            multiplierDisplay.value = multiplier ? `x${multiplier.toFixed(2)}` : '';
+            multiplierDisplay.value = rowMultiplier ? `x${rowMultiplier.toFixed(2)}` : '';
         }
 
-        // Calcul du prix final (drug price + (1+multiplicateur))
-        const finalPrice = initialPrice * (multiplier);
+        // Calculate the final price using the cumulative formula: price * (1 + sum of all multipliers)
+        const finalPrice = initialPrice * (1 + totalEffectMultiplier);
 
-        // Affichage du prix final
+        // Display the final price
         const finalPriceInput = row.querySelector('.final-price');
         if (finalPriceInput) {
             finalPriceInput.value = finalPrice ? `${finalPrice.toFixed(2)} €` : '';
-            // Stocker la valeur numérique pour les calculs ultérieurs
+            // Store the numeric value for future calculations
             finalPriceInput.dataset.value = finalPrice;
         }
 
         return {
             price: finalPrice,
-            name: ''
+            name: drugName
         };
     }
 
